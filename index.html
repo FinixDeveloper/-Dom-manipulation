@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom manipulation Form</title>
+    <link rel="stylesheet" href="calculator.css"> 
+    <style> @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap');</style>
+  <style>
+    *{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.required-asterisk{
+content:"*";color:red;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(51,55,90);
+    font-size: 18px;
+    color: #fff;
+}
+h1{
+    text-align: center;
+}
+#description{
+    text-align: center;
+}
+.container{
+    max-width: 700px;
+    height: auto;
+    margin: 50px auto;
+    border-radius: 10px;
+    padding: 20px;
+}
+#formSubmission{
+    margin: 10px;
+}
+.container .form-group input{
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: rgb(36,39,70);
+    color: #fff;
+
+}
+.container .form-group select{
+    width: 100%;
+    height: 30px;
+    font-size: 16px;
+}
+.container .form-group button{
+    width: 20%;
+    height: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: rgb(66,205,124);
+    color: #000;
+    border: #fff 2px solid;
+    border-radius: 10px;
+    justify-content: center;
+    padding: 3px;
+    cursor: pointer;
+}
+.container.form-group{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+.container .form-group button:hover{
+    opacity: 75%;
+}
+.container.form-group{
+    margin: 0px 50px;
+}
+.container table{
+    margin: 10px auto;
+    
+
+}
+table th,td{
+    padding: 5px;
+    font-size: 14px;
+    
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+    padding: 14px 16px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: .3s;
+}
+  
+  .label:hover,
+  .label:focus-within,
+  .label:active {
+    background: hsla(0, 0%, 80%, .14);
+  }
+  
+  .radio-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    z-index: -1;
+  }
+  
+  .radio-design {
+    width: 18px;
+    height: 18px;
+    border-radius: 100px;
+    background: linear-gradient(to right bottom, hsl(154, 97%, 62%), hsl(225, 97%, 62%));
+    position: relative;
+  }
+  
+  .radio-design::before {
+    content: '';
+    display: inline-block;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    background: hsl(0, 0%, 90%);
+    transform: scale(1.1);
+    transition: .3s;
+  }
+  
+  .radio-input:checked+.radio-design::before {
+    transform: scale(0);
+  }
+  
+  .label-text {
+    color: whitesmoke;
+    margin-left: 14px;
+    letter-spacing: 3px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: .3s;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .radio-input:checked~.label-text {
+    color: hsl(0, 0%, 40%);
+  }
+
+  .check {
+    display: flex;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 1px;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .check input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    height: 1px;
+    width: 1px;
+    z-index: -1;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .check:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .check input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .check input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .check .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  
+  @media screen and (max-width: 833px) {
+    .input-field {
+      width: 80%;
+    }
+    select {
+      width: 90%;
+    }
+  
+    textarea{
+        width: 90%;
+    }
+  }
+  
+  @media screen and (max-width: 520px) {
+    .labels {
+      width: 100%;
+      text-align: left;
+    }
+    .inputs {
+      width: 80%;
+      float: left;
+    }
+    .input-field {
+      width: 100%;
+    }
+    select {
+      width: 100%;
+    }
+  }
+  </style>
+</head>
+<body>
+    <div class="container">
+    <p id="description">Guvi Task Dom manipulation with form</p>
+    <h1 id="title">Form Submit</h1>
+    <div class="form-group">
+    <form action="" id="form">
+        <b>
+        <label for="firstName"><span class="required-asterisk">*</span></label>
+        </b>
+        <lable class="form-field" for="firstName">FirstName</lable>
+        <input class="form-field" type="text" placeholder="Enter Your first name" id="firstName" required="required"></br></br>
+
+        <b>
+        <label for="lastName"><span class="required-asterisk">*</span></label>
+        </b>
+        <lable class="form-field" for="lastName">Last Name</lable>
+        <input class="form-field" type="text" placeholder="Enter Your last name" id="lastName" required="required"></br></br>
+
+        <b>
+        <label for="adress"><span class="required-asterisk">*</span></label>
+        </b>
+        <lable class="form-field" for="adress">Address</lable>
+        <input class="form-field" type="text" placeholder="Enter Your address" id="adress" required="required"></br></br>
+
+        <b>
+        <label for="pincode"><span class="required-asterisk">*</span></label>
+        </b>
+        <lable class="form-field" for="pincode">Pincode</lable>
+        <input class="form-field" type="text" placeholder="Enter Your pincode" id="pincode" required="required"></br></br>
+
+            <b>
+            <label for="form-field"><span class="required-asterisk">*</span></label>
+            </b>
+            <label class="form-field" for="gender" id="gender">Gender</label>
+            <label class="label">
+              <input value="male" name="gender" id="gender" class="radio-input" type="radio">
+              <div class="radio-design"></div>
+              <div class="label-text">Male</div>
+            </label>
+            <label class="label">
+              <input value="female" name="gender" id="gender" class="radio-input" type="radio">
+              <div class="radio-design"></div>
+              <div class="label-text">Female</div>
+            </label>
+            <label class="label">
+              <input value="other" name="gender" id="gender" class="radio-input" type="radio">
+              <div class="radio-design"></div>
+              <div class="label-text">Other</div>
+            </label>
+        </br>
+
+        <div class="form-field">
+            <b>
+            <label for="food"><span class="required-asterisk">*</span></label>
+            </b>
+        <label class="form-field" for="food" id="food">Choice of Food</label><br><br>
+        <label class="check">Pizza
+            <input id="food" type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          
+          <label class="check">Sandwich
+            <input id="food" type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          
+          <label class="check">Biriyani
+            <input id="food" type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          
+          <label class="check">Chicken
+            <input id="food" type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="check">Mutton
+            <input id="food" type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        </br>
+
+        <b>
+        <label for="state"><span class="required-asterisk">*</span></label>
+        </b>
+        <lable class="form-field" for="state">State</lable>
+        <input class="form-field" type="text" placeholder="Enter Your state" id="state" required="required"></br></br>
+
+        <b>
+        <label for="country"><span class="required-asterisk">*</span></label>
+        </b>
+        <lable class="form-field" for="country">Country</lable>
+        <input class="form-field" type="text" placeholder="Enter Your Country" id="country" required="required"></br></br>
+
+        <button class="form-field" type="submit" id="submit">Submit</button> 
+        <button class="form-field" type="reset" id="clear">Reset</button>
+        
+    </form>
+</div>
+     <table class="table">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
+            <th>Pincode</th>
+            <th>Gender</th>
+            <th>Choice of Food</th>
+            <th>State</th>
+            <th>Country</th>
+        </tr>
+        </thead>
+    <tbody>
+
+    </tbody>
+     </table>
+    </div>
+    <script>
+        var formSubmit=document.querySelector('#form')
+
+formSubmit.addEventListener('submit',(e) => {
+e.preventDefault()
+var firstName = document.querySelector('#firstName')
+var lastName = document.querySelector('#lastName')
+var adress = document.querySelector('#adress')
+var pincode = document.querySelector('#pincode')
+var gender = document.querySelector('#gender')
+var food = document.querySelector('#food')
+var state = document.querySelector('#state')
+var country = document.querySelector('#country')
+
+var array = [firstName,lastName,adress,pincode,gender,food,state,country]
+
+var tableRow = document.createElement('tr')
+var count = 0;
+for(var i = 0; i < array.length; i++){
+  if(array[i].value  != ''){
+    var tableData = document.createElement('td')
+    tableData.innerHTML=array[i].value
+    tableRow.append(tableData)
+    count++
+  
+  }
+  
+}
+if(count > 2) {
+    document.querySelector('tbody').append(tableRow)
+  }else{
+    alert("Must choose at least 2 out of 5 options")
+  }
+  for(let i of array){
+    i.value = ''
+  }
+  
+  })
+  
+    </script>
+    </body>
+    <script src="calculator.js"></script>
+    <script src="https://app.zenclass.in/sheets/v1/js/zen/suite/bundle.js"></script>
+</html>
